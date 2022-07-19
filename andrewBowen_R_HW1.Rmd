@@ -1,0 +1,63 @@
+---
+title: "AndrewBowen_R_HW1"
+author: "Andrew Bowen"
+date: "2022-07-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1 - 12!
+
+```{r factorial}
+# Iterating down from 12 and multiplying into running "product"
+f <- as.integer(1)
+for (x in 12:1) {
+  f <- f * x
+}
+print(f)
+
+# Checking against built-in factorial func
+f == factorial(12)
+```
+
+
+## 2 - Sequence Vector
+Using sequence built-in type from 20...50 with step size of 5
+```{r sequence}
+# Creating numeric vector with numbers from 20 to 50, spaced by 5
+vector <- seq(20, 50, by=5)
+vector
+```
+
+## 3 - Quadratic Solution Function
+
+There are 3 cases: two, one or no real roots. The below function prints out each case (ignoring the edge case of complex roots).
+```{r quadratic}
+# 3 - creating a quadratic solution function'
+
+quadratic <- function(a, b, c) {
+  discriminant <- (b^2) - (4 * a * c)
+
+  if(discriminant < 0) {
+    print("No real roots")
+  }
+  # Two roots case, printing both
+  else if(discriminant > 0) {
+    pos_root <- (-b + sqrt(discriminant)) / (2 * a)
+    neg_root <- (-b - sqrt(discriminant)) / (2 * a)
+
+    print(pos_root)
+    print(neg_root)
+  }
+  # If discriminant is 0, one root is soln
+  else
+    print((-b) / (2*a))
+}
+
+```
+
+quadratic(1,3,2)
+

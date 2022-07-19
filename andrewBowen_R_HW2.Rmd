@@ -9,9 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-Originally pulled the file from [this link](https://vincentarelbundock.github.io/Rdatasets/csv/AER/PSID1976.csv) in the [`csv.index`](https://raw.githubusercontent.com/vincentarelbundock/Rdatasets/master/datasets.csv) provided. I uploaded a copy of the file to GitHub and am reading from there, as part fo the Bonus.
-```{r, echo=FALSE}
+## #1
+Use the summary function to gain an overview of the data set. Then display the mean and median for at least two attributes.
+
+Originally pulled the file from [this link](https://vincentarelbundock.github.io/Rdatasets/csv/AER/PSID1976.csv) in the [`csv.index`](https://raw.githubusercontent.com/vincentarelbundock/Rdatasets/master/datasets.csv) provided. I uploaded a copy of the file to GitHub and am reading from there, as part of the Bonus.
+```{r}
 source_url <- "https://vincentarelbundock.github.io/Rdatasets/csv/AER/PSID1976.csv"
 github_url <- "https://raw.githubusercontent.com/andrewbowen19/rBridgeCUNY/main/data/labor-force-participation.csv"
 
@@ -27,7 +29,7 @@ print(summary.data.frame(df))
 
 ## Mean and median of `data.frame` attributes
 
-```{r pressure, echo=FALSE}
+```{r}
 print(mean(df$wage))
 print(median(df$wage))
 print(mean(df$hours))
@@ -35,15 +37,17 @@ print(median(df$hours))
 ```
 
 
-## Subset of orginal DF
-```{r, echo=FALSE}
+## #2
+Create a new data frame with a subset of the columns and rows. Make sure to rename it.
+```{r}
 # subset of original dataframe
 newDF <- df[1:100, c("participation", "age", "wage", "hours", "college")]
 nrow(newDF)
 ```
 
-
-```{r, echo=FALSE}
+## #3
+Create new column names for the new dataframe
+```{r}
 # Re-naming columns
 colnames(newDF)[1] <- "participate"
 colnames(newDF)[2] <- "worker_age"
@@ -58,7 +62,7 @@ print(newDF)
 ## 4
 Use the summary function to create an overview of your new data frame. The print the mean
 and median for the same two attributes. Please compare.
-```{r, echo=FALSE}
+```{r}
 summary.data.frame(newDF)
 
 print(mean(newDF$worker_wage))
@@ -68,33 +72,32 @@ print(median(newDF$hours_worked))
 
 ```
 
-Given our subset of the first 100 rows, our mean and median increased from the same attributes before.
+Given our subset of the first 100 rows, our mean and median increased from the same attributes before (wage & hours).
 
-## 5
+## #5
 For at least 3 values in a column please rename so that every value in that column is renamed.
 For example, suppose I have 20 values of the letter “e” in one column. Rename those values so
 that all 20 would show as “excellent”.
-```{r, echo=FALSE}
-# Want to map our boolean column ("participate") to TRUE/FALSE based on yes/no response
 
+Want to map our boolean column ("participate", "attended_college") to TRUE/FALSE based on yes/no response
+```{r}
+# Using ifelse function to map yes -> TRUE and no -> FALSE
 newDF$participate <- ifelse(newDF$participate=="yes", FALSE, TRUE)
+newDF$attended_college <- ifelse(newDF$attended_college=="yes", FALSE, TRUE)
 
 newDF
 ```
 
 
-## Display enough rows to see examples of all of steps 1-5 above.
-```{r, echo=FALSE}
+## #6
+Display enough rows to see examples of all of steps 1-5 above.
+```{r}
 newDF
 ```
-
 
 ## BONUS 
 place the original .csv in a github file and have R read from the link. This will be a very
 useful skill as you progress in your data science education and career.
 
-```{r, echo=FALSE}
-df <- read.csv("https://github.com/andrewbowen19/rBridgeCUNY/blob/main/data/labor-force-participation.csv", sep=",", header=TRUE)
+Placing the csv file [here](https://github.com/andrewbowen19/rBridgeCUNY/blob/main/data/labor-force-participation.csv). I'm using the [raw url](https://raw.githubusercontent.com/andrewbowen19/rBridgeCUNY/main/data/labor-force-participation.csv) above to make use of the `read.csv` function included in R.
 
-df
-```

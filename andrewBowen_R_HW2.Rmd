@@ -10,13 +10,18 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## R Markdown
+Originally pulled the file from [this link](https://vincentarelbundock.github.io/Rdatasets/csv/AER/PSID1976.csv) in the [`csv.index`](https://raw.githubusercontent.com/vincentarelbundock/Rdatasets/master/datasets.csv) provided. I uploaded a copy of the file to GitHub and am reading from there, as part fo the Bonus.
+```{r, echo=FALSE}
+source_url <- "https://vincentarelbundock.github.io/Rdatasets/csv/AER/PSID1976.csv"
+github_url <- "https://raw.githubusercontent.com/andrewbowen19/rBridgeCUNY/main/data/labor-force-participation.csv"
 
+# Pulling file from our github repo
+df <- read.csv(github_url, sep=",", header=TRUE)
 
-```{r}
-df <- read.table("https://vincentarelbundock.github.io/Rdatasets/csv/AER/PSID1976.csv",
-                 sep=",", header=TRUE)
+# Pulling file from "source" (csv.index)
+# df <- read.table("https://vincentarelbundock.github.io/Rdatasets/csv/AER/PSID1976.csv",sep=",", header=TRUE)
 
-# Getting summary of our df
+# Printing summary of our df
 print(summary.data.frame(df))
 ```
 
@@ -33,11 +38,63 @@ print(median(df$hours))
 ## Subset of orginal DF
 ```{r, echo=FALSE}
 # subset of original dataframe
-newDF <- df[c(1, 2, 3, 4, 5), c("participation", "age", "wage", "hours", "college")]
-
+newDF <- df[1:100, c("participation", "age", "wage", "hours", "college")]
+nrow(newDF)
 ```
 
 
-## 
+```{r, echo=FALSE}
+# Re-naming columns
+colnames(newDF)[1] <- "participate"
+colnames(newDF)[2] <- "worker_age"
+colnames(newDF)[3] <- "worker_wage"
+colnames(newDF)[4] <- "hours_worked"
+colnames(newDF)[5] <- "attended_college"
+
+print(newDF)
+```
 
 
+## 4
+Use the summary function to create an overview of your new data frame. The print the mean
+and median for the same two attributes. Please compare.
+```{r, echo=FALSE}
+summary.data.frame(newDF)
+
+print(mean(newDF$worker_wage))
+print(median(newDF$worker_wage))
+print(mean(newDF$hours_worked))
+print(median(newDF$hours_worked))
+
+```
+
+Given our subset of the first 100 rows, our mean and median increased from the same attributes before.
+
+## 5
+For at least 3 values in a column please rename so that every value in that column is renamed.
+For example, suppose I have 20 values of the letter “e” in one column. Rename those values so
+that all 20 would show as “excellent”.
+```{r, echo=FALSE}
+# Want to map our boolean column ("participate") to TRUE/FALSE based on yes/no response
+
+newDF$participate <- ifelse(newDF$participate=="yes", FALSE, TRUE)
+
+newDF
+```
+
+
+## Display enough rows to see examples of all of steps 1-5 above.
+```{r, echo=FALSE}
+newDF
+```
+
+
+## BONUS 
+place the original .csv in a github file and have R read from the link. This will be a very
+useful skill as you progress in your data science education and career.
+
+```{r, echo=FALSE}
+df <- read.csv("https://github.com/andrewbowen19/rBridgeCUNY/blob/main/data/labor-force-participation.csv", sep=",", header=TRUE)
+
+df
+```

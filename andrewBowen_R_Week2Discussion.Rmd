@@ -85,4 +85,17 @@ ggplot(df, aes(x=APG, y=PPG))+
 ```
 
 
+```{r}
+# Would like to plot rbounds vs assists as those are generally not performed by players of the same position
+ggplot(df, aes(x=RPG, y=APG)) + 
+  geom_point(size=2, shape=23)
+```
 
+Had to download the dataset from the [source page](https://www.basketball-reference.com/leagues/NBA_2022_totals.html) but would like to read the HTML directly for the table. Note that the *Hide Partial Rows* option is turned off in our setup.
+```{r}
+# Reading from HTML produces an error, but reading the csv file locally works
+#df = read.html("https://www.basketball-reference.com/leagues/NBA_2022_totals.html#totals_stats", sep=",", header=TRUE)
+
+
+
+```

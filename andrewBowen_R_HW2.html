@@ -431,6 +431,25 @@ print(summary.data.frame(df))</code></pre>
 ##                                       
 ##                                       
 ## </code></pre>
+<pre class="r"><code>head(df, 5)</code></pre>
+<pre><code>##   X participation hours youngkids oldkids age education   wage repwage hhours
+## 1 1           yes  1610         1       0  32        12 3.3540    2.65   2708
+## 2 2           yes  1656         0       2  30        12 1.3889    2.65   2310
+## 3 3           yes  1980         1       3  35        12 4.5455    4.04   3072
+## 4 4           yes   456         0       3  34        12 1.0965    3.25   1920
+## 5 5           yes  1568         1       2  31        14 4.5918    3.60   2000
+##   hage heducation   hwage fincome    tax meducation feducation unemp city
+## 1   34         12  4.0288   16310 0.7215         12          7   5.0   no
+## 2   30          9  8.4416   21800 0.6615          7          7  11.0  yes
+## 3   40         12  3.5807   21040 0.6915         12          7   5.0   no
+## 4   53         10  3.5417    7300 0.7815          7          7   5.0   no
+## 5   32         12 10.0000   27300 0.6215         12         14   9.5  yes
+##   experience college hcollege
+## 1         14      no       no
+## 2          5      no       no
+## 3         15      no       no
+## 4          6      no       no
+## 5          7     yes       no</code></pre>
 </div>
 <div id="mean-and-median-of-data.frame-attributes" class="section level2">
 <h2>Mean and median of <code>data.frame</code> attributes</h2>
@@ -448,7 +467,7 @@ print(summary.data.frame(df))</code></pre>
 <p>Create a new data frame with a subset of the columns and rows. Make
 sure to rename it.</p>
 <pre class="r"><code># subset of original dataframe
-newDF &lt;- df[1:100, c(&quot;participation&quot;, &quot;age&quot;, &quot;wage&quot;, &quot;hours&quot;, &quot;college&quot;)]
+newDF &lt;- df[1:100, c(&quot;participation&quot;, &quot;age&quot;, &quot;wage&quot;, &quot;hours&quot;, &quot;college&quot;, &quot;city&quot;)]
 nrow(newDF)</code></pre>
 <pre><code>## [1] 100</code></pre>
 </div>
@@ -461,6 +480,7 @@ colnames(newDF)[2] &lt;- &quot;worker_age&quot;
 colnames(newDF)[3] &lt;- &quot;worker_wage&quot;
 colnames(newDF)[4] &lt;- &quot;hours_worked&quot;
 colnames(newDF)[5] &lt;- &quot;attended_college&quot;
+colnames(newDF)[6] &lt;- &quot;city_of_residence&quot;
 
 print(newDF)</code></pre>
 <pre><code>##     participate worker_age worker_wage hours_worked attended_college
@@ -563,7 +583,108 @@ print(newDF)</code></pre>
 ## 97          yes         45      4.8583          988               no
 ## 98          yes         32      1.7435         2581              yes
 ## 99          yes         47      2.4631         2030               no
-## 100         yes         34      2.4213          413              yes</code></pre>
+## 100         yes         34      2.4213          413              yes
+##     city_of_residence
+## 1                  no
+## 2                 yes
+## 3                  no
+## 4                  no
+## 5                 yes
+## 6                 yes
+## 7                  no
+## 8                  no
+## 9                  no
+## 10                 no
+## 11                 no
+## 12                 no
+## 13                 no
+## 14                yes
+## 15                yes
+## 16                yes
+## 17                yes
+## 18                yes
+## 19                yes
+## 20                 no
+## 21                 no
+## 22                 no
+## 23                yes
+## 24                 no
+## 25                yes
+## 26                yes
+## 27                yes
+## 28                yes
+## 29                 no
+## 30                 no
+## 31                yes
+## 32                yes
+## 33                 no
+## 34                yes
+## 35                yes
+## 36                 no
+## 37                yes
+## 38                 no
+## 39                 no
+## 40                yes
+## 41                 no
+## 42                yes
+## 43                yes
+## 44                 no
+## 45                 no
+## 46                 no
+## 47                yes
+## 48                 no
+## 49                 no
+## 50                 no
+## 51                yes
+## 52                yes
+## 53                 no
+## 54                yes
+## 55                 no
+## 56                yes
+## 57                yes
+## 58                yes
+## 59                yes
+## 60                yes
+## 61                 no
+## 62                yes
+## 63                yes
+## 64                yes
+## 65                yes
+## 66                 no
+## 67                 no
+## 68                yes
+## 69                yes
+## 70                 no
+## 71                yes
+## 72                yes
+## 73                yes
+## 74                yes
+## 75                yes
+## 76                yes
+## 77                 no
+## 78                yes
+## 79                yes
+## 80                yes
+## 81                yes
+## 82                 no
+## 83                yes
+## 84                yes
+## 85                 no
+## 86                yes
+## 87                yes
+## 88                yes
+## 89                yes
+## 90                 no
+## 91                yes
+## 92                yes
+## 93                yes
+## 94                yes
+## 95                 no
+## 96                 no
+## 97                yes
+## 98                yes
+## 99                 no
+## 100                no</code></pre>
 </div>
 <div id="section-3" class="section level2">
 <h2>4</h2>
@@ -578,12 +699,12 @@ compare.</p>
 ##                     Mean   :42.61   Mean   : 3.7603   Mean   :1330.0  
 ##                     3rd Qu.:49.25   3rd Qu.: 4.6211   3rd Qu.:1952.8  
 ##                     Max.   :60.00   Max.   :14.6310   Max.   :4210.0  
-##  attended_college  
-##  Length:100        
-##  Class :character  
-##  Mode  :character  
-##                    
-##                    
+##  attended_college   city_of_residence 
+##  Length:100         Length:100        
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character  
+##                                       
+##                                       
 ## </code></pre>
 <pre class="r"><code>print(mean(newDF$worker_wage))</code></pre>
 <pre><code>## [1] 3.760277</code></pre>
@@ -608,214 +729,79 @@ TRUE/FALSE based on yes/no response</p>
 newDF$participate &lt;- ifelse(newDF$participate==&quot;yes&quot;, FALSE, TRUE)
 newDF$attended_college &lt;- ifelse(newDF$attended_college==&quot;yes&quot;, FALSE, TRUE)
 
-newDF</code></pre>
-<pre><code>##     participate worker_age worker_wage hours_worked attended_college
-## 1         FALSE         32      3.3540         1610             TRUE
-## 2         FALSE         30      1.3889         1656             TRUE
-## 3         FALSE         35      4.5455         1980             TRUE
-## 4         FALSE         34      1.0965          456             TRUE
-## 5         FALSE         31      4.5918         1568            FALSE
-## 6         FALSE         54      4.7421         2032             TRUE
-## 7         FALSE         37      8.3333         1440            FALSE
-## 8         FALSE         54      7.8431         1020             TRUE
-## 9         FALSE         48      2.1262         1458             TRUE
-## 10        FALSE         39      4.6875         1600             TRUE
-## 11        FALSE         33      4.0630         1969             TRUE
-## 12        FALSE         42      4.5918         1960             TRUE
-## 13        FALSE         30      2.0833          240             TRUE
-## 14        FALSE         43      2.2668          997             TRUE
-## 15        FALSE         43      3.6797         1848             TRUE
-## 16        FALSE         35      1.3472         1224             TRUE
-## 17        FALSE         43      3.2143         1400             TRUE
-## 18        FALSE         39      5.1750          640             TRUE
-## 19        FALSE         45      2.0000         2000             TRUE
-## 20        FALSE         35      7.5529         1324             TRUE
-## 21        FALSE         42      3.5052         2215            FALSE
-## 22        FALSE         30      3.5714         1680             TRUE
-## 23        FALSE         48      3.2500         1600            FALSE
-## 24        FALSE         45      3.2500          800             TRUE
-## 25        FALSE         31      2.1545         1955             TRUE
-## 26        FALSE         43      3.7879          660            FALSE
-## 27        FALSE         59      4.0000          525             TRUE
-## 28        FALSE         32      4.7269         1904             TRUE
-## 29        FALSE         31      7.2559         1516            FALSE
-## 30        FALSE         42      5.8671          346             TRUE
-## 31        FALSE         50      1.5385         1040             TRUE
-## 32        FALSE         59      2.4590          732            FALSE
-## 33        FALSE         36      5.8511         1880            FALSE
-## 34        FALSE         51      3.5714         1680             TRUE
-## 35        FALSE         45      3.8068         2081            FALSE
-## 36        FALSE         42      2.4638          690             TRUE
-## 37        FALSE         46      2.3753         4210             TRUE
-## 38        FALSE         46      4.5351         2205             TRUE
-## 39        FALSE         51      5.6183         1952            FALSE
-## 40        FALSE         30     14.6310         1302            FALSE
-## 41        FALSE         30      2.6786          112             TRUE
-## 42        FALSE         57      3.9194          893             TRUE
-## 43        FALSE         31      2.5729          583            FALSE
-## 44        FALSE         48      4.5375          480             TRUE
-## 45        FALSE         30      2.0000         1900             TRUE
-## 46        FALSE         34      3.4722          576             TRUE
-## 47        FALSE         48      2.0161         2056            FALSE
-## 48        FALSE         45      4.5716         1984             TRUE
-## 49        FALSE         51      2.2727         2640             TRUE
-## 50        FALSE         30      2.6375          240             TRUE
-## 51        FALSE         46      2.2899         1173             TRUE
-## 52        FALSE         58      1.0989         3640             TRUE
-## 53        FALSE         37      1.1765          340             TRUE
-## 54        FALSE         52      1.6000          500             TRUE
-## 55        FALSE         52      1.8762         1599             TRUE
-## 56        FALSE         31      4.0437         1830            FALSE
-## 57        FALSE         55      9.6354         1920            FALSE
-## 58        FALSE         34      8.0409         2052            FALSE
-## 59        FALSE         55      4.5990         2312            FALSE
-## 60        FALSE         39      2.1429          196             TRUE
-## 61        FALSE         40      4.4000         2500            FALSE
-## 62        FALSE         43      3.5354         1980             TRUE
-## 63        FALSE         48      2.7174         1840             TRUE
-## 64        FALSE         47      6.2500          320             TRUE
-## 65        FALSE         41     11.9330          419             TRUE
-## 66        FALSE         36      3.5931         1880             TRUE
-## 67        FALSE         46      6.9444           72            FALSE
-## 68        FALSE         34      2.9167          120             TRUE
-## 69        FALSE         41      3.0769         1885             TRUE
-## 70        FALSE         51      3.7500          240             TRUE
-## 71        FALSE         33      5.7259         1729             TRUE
-## 72        FALSE         52      3.6757         1850             TRUE
-## 73        FALSE         58      5.1648         2033             TRUE
-## 74        FALSE         34      8.2237          608             TRUE
-## 75        FALSE         31      4.3365         1153             TRUE
-## 76        FALSE         48      4.9819         2208             TRUE
-## 77        FALSE         32      0.3571          252             TRUE
-## 78        FALSE         49      2.9674          337            FALSE
-## 79        FALSE         32      1.0000           90            FALSE
-## 80        FALSE         58      2.5554         1174             TRUE
-## 81        FALSE         50      0.8602          372             TRUE
-## 82        FALSE         60      1.0000           30            FALSE
-## 83        FALSE         50      2.9261         1800             TRUE
-## 84        FALSE         56      3.5461          282            FALSE
-## 85        FALSE         51      1.6264          720             TRUE
-## 86        FALSE         54      8.3333         1440            FALSE
-## 87        FALSE         59      3.0952         2100            FALSE
-## 88        FALSE         46      2.7000         1000             TRUE
-## 89        FALSE         46      5.2521          952            FALSE
-## 90        FALSE         39      1.4154         1413             TRUE
-## 91        FALSE         44      4.7986         2100             TRUE
-## 92        FALSE         33      1.6667          120             TRUE
-## 93        FALSE         33      1.1217         3000             TRUE
-## 94        FALSE         48      0.5000         1000             TRUE
-## 95        FALSE         31      0.7143          336             TRUE
-## 96        FALSE         45      2.7961         1216             TRUE
-## 97        FALSE         45      4.8583          988             TRUE
-## 98        FALSE         32      1.7435         2581            FALSE
-## 99        FALSE         47      2.4631         2030             TRUE
-## 100       FALSE         34      2.4213          413            FALSE</code></pre>
+# Renaming city column to LA or NYC (boolean-ish value)
+newDF$city_of_residence &lt;- ifelse(newDF$city_of_residence==&quot;yes&quot;, &quot;LA&quot;, &quot;NYC&quot;)
+
+head(newDF, 10)</code></pre>
+<pre><code>##    participate worker_age worker_wage hours_worked attended_college
+## 1        FALSE         32      3.3540         1610             TRUE
+## 2        FALSE         30      1.3889         1656             TRUE
+## 3        FALSE         35      4.5455         1980             TRUE
+## 4        FALSE         34      1.0965          456             TRUE
+## 5        FALSE         31      4.5918         1568            FALSE
+## 6        FALSE         54      4.7421         2032             TRUE
+## 7        FALSE         37      8.3333         1440            FALSE
+## 8        FALSE         54      7.8431         1020             TRUE
+## 9        FALSE         48      2.1262         1458             TRUE
+## 10       FALSE         39      4.6875         1600             TRUE
+##    city_of_residence
+## 1                NYC
+## 2                 LA
+## 3                NYC
+## 4                NYC
+## 5                 LA
+## 6                 LA
+## 7                NYC
+## 8                NYC
+## 9                NYC
+## 10               NYC</code></pre>
 </div>
 <div id="section-5" class="section level2">
 <h2>#6</h2>
 <p>Display enough rows to see examples of all of steps 1-5 above.</p>
-<pre class="r"><code>newDF</code></pre>
-<pre><code>##     participate worker_age worker_wage hours_worked attended_college
-## 1         FALSE         32      3.3540         1610             TRUE
-## 2         FALSE         30      1.3889         1656             TRUE
-## 3         FALSE         35      4.5455         1980             TRUE
-## 4         FALSE         34      1.0965          456             TRUE
-## 5         FALSE         31      4.5918         1568            FALSE
-## 6         FALSE         54      4.7421         2032             TRUE
-## 7         FALSE         37      8.3333         1440            FALSE
-## 8         FALSE         54      7.8431         1020             TRUE
-## 9         FALSE         48      2.1262         1458             TRUE
-## 10        FALSE         39      4.6875         1600             TRUE
-## 11        FALSE         33      4.0630         1969             TRUE
-## 12        FALSE         42      4.5918         1960             TRUE
-## 13        FALSE         30      2.0833          240             TRUE
-## 14        FALSE         43      2.2668          997             TRUE
-## 15        FALSE         43      3.6797         1848             TRUE
-## 16        FALSE         35      1.3472         1224             TRUE
-## 17        FALSE         43      3.2143         1400             TRUE
-## 18        FALSE         39      5.1750          640             TRUE
-## 19        FALSE         45      2.0000         2000             TRUE
-## 20        FALSE         35      7.5529         1324             TRUE
-## 21        FALSE         42      3.5052         2215            FALSE
-## 22        FALSE         30      3.5714         1680             TRUE
-## 23        FALSE         48      3.2500         1600            FALSE
-## 24        FALSE         45      3.2500          800             TRUE
-## 25        FALSE         31      2.1545         1955             TRUE
-## 26        FALSE         43      3.7879          660            FALSE
-## 27        FALSE         59      4.0000          525             TRUE
-## 28        FALSE         32      4.7269         1904             TRUE
-## 29        FALSE         31      7.2559         1516            FALSE
-## 30        FALSE         42      5.8671          346             TRUE
-## 31        FALSE         50      1.5385         1040             TRUE
-## 32        FALSE         59      2.4590          732            FALSE
-## 33        FALSE         36      5.8511         1880            FALSE
-## 34        FALSE         51      3.5714         1680             TRUE
-## 35        FALSE         45      3.8068         2081            FALSE
-## 36        FALSE         42      2.4638          690             TRUE
-## 37        FALSE         46      2.3753         4210             TRUE
-## 38        FALSE         46      4.5351         2205             TRUE
-## 39        FALSE         51      5.6183         1952            FALSE
-## 40        FALSE         30     14.6310         1302            FALSE
-## 41        FALSE         30      2.6786          112             TRUE
-## 42        FALSE         57      3.9194          893             TRUE
-## 43        FALSE         31      2.5729          583            FALSE
-## 44        FALSE         48      4.5375          480             TRUE
-## 45        FALSE         30      2.0000         1900             TRUE
-## 46        FALSE         34      3.4722          576             TRUE
-## 47        FALSE         48      2.0161         2056            FALSE
-## 48        FALSE         45      4.5716         1984             TRUE
-## 49        FALSE         51      2.2727         2640             TRUE
-## 50        FALSE         30      2.6375          240             TRUE
-## 51        FALSE         46      2.2899         1173             TRUE
-## 52        FALSE         58      1.0989         3640             TRUE
-## 53        FALSE         37      1.1765          340             TRUE
-## 54        FALSE         52      1.6000          500             TRUE
-## 55        FALSE         52      1.8762         1599             TRUE
-## 56        FALSE         31      4.0437         1830            FALSE
-## 57        FALSE         55      9.6354         1920            FALSE
-## 58        FALSE         34      8.0409         2052            FALSE
-## 59        FALSE         55      4.5990         2312            FALSE
-## 60        FALSE         39      2.1429          196             TRUE
-## 61        FALSE         40      4.4000         2500            FALSE
-## 62        FALSE         43      3.5354         1980             TRUE
-## 63        FALSE         48      2.7174         1840             TRUE
-## 64        FALSE         47      6.2500          320             TRUE
-## 65        FALSE         41     11.9330          419             TRUE
-## 66        FALSE         36      3.5931         1880             TRUE
-## 67        FALSE         46      6.9444           72            FALSE
-## 68        FALSE         34      2.9167          120             TRUE
-## 69        FALSE         41      3.0769         1885             TRUE
-## 70        FALSE         51      3.7500          240             TRUE
-## 71        FALSE         33      5.7259         1729             TRUE
-## 72        FALSE         52      3.6757         1850             TRUE
-## 73        FALSE         58      5.1648         2033             TRUE
-## 74        FALSE         34      8.2237          608             TRUE
-## 75        FALSE         31      4.3365         1153             TRUE
-## 76        FALSE         48      4.9819         2208             TRUE
-## 77        FALSE         32      0.3571          252             TRUE
-## 78        FALSE         49      2.9674          337            FALSE
-## 79        FALSE         32      1.0000           90            FALSE
-## 80        FALSE         58      2.5554         1174             TRUE
-## 81        FALSE         50      0.8602          372             TRUE
-## 82        FALSE         60      1.0000           30            FALSE
-## 83        FALSE         50      2.9261         1800             TRUE
-## 84        FALSE         56      3.5461          282            FALSE
-## 85        FALSE         51      1.6264          720             TRUE
-## 86        FALSE         54      8.3333         1440            FALSE
-## 87        FALSE         59      3.0952         2100            FALSE
-## 88        FALSE         46      2.7000         1000             TRUE
-## 89        FALSE         46      5.2521          952            FALSE
-## 90        FALSE         39      1.4154         1413             TRUE
-## 91        FALSE         44      4.7986         2100             TRUE
-## 92        FALSE         33      1.6667          120             TRUE
-## 93        FALSE         33      1.1217         3000             TRUE
-## 94        FALSE         48      0.5000         1000             TRUE
-## 95        FALSE         31      0.7143          336             TRUE
-## 96        FALSE         45      2.7961         1216             TRUE
-## 97        FALSE         45      4.8583          988             TRUE
-## 98        FALSE         32      1.7435         2581            FALSE
-## 99        FALSE         47      2.4631         2030             TRUE
-## 100       FALSE         34      2.4213          413            FALSE</code></pre>
+<pre class="r"><code>head(newDF, 20)</code></pre>
+<pre><code>##    participate worker_age worker_wage hours_worked attended_college
+## 1        FALSE         32      3.3540         1610             TRUE
+## 2        FALSE         30      1.3889         1656             TRUE
+## 3        FALSE         35      4.5455         1980             TRUE
+## 4        FALSE         34      1.0965          456             TRUE
+## 5        FALSE         31      4.5918         1568            FALSE
+## 6        FALSE         54      4.7421         2032             TRUE
+## 7        FALSE         37      8.3333         1440            FALSE
+## 8        FALSE         54      7.8431         1020             TRUE
+## 9        FALSE         48      2.1262         1458             TRUE
+## 10       FALSE         39      4.6875         1600             TRUE
+## 11       FALSE         33      4.0630         1969             TRUE
+## 12       FALSE         42      4.5918         1960             TRUE
+## 13       FALSE         30      2.0833          240             TRUE
+## 14       FALSE         43      2.2668          997             TRUE
+## 15       FALSE         43      3.6797         1848             TRUE
+## 16       FALSE         35      1.3472         1224             TRUE
+## 17       FALSE         43      3.2143         1400             TRUE
+## 18       FALSE         39      5.1750          640             TRUE
+## 19       FALSE         45      2.0000         2000             TRUE
+## 20       FALSE         35      7.5529         1324             TRUE
+##    city_of_residence
+## 1                NYC
+## 2                 LA
+## 3                NYC
+## 4                NYC
+## 5                 LA
+## 6                 LA
+## 7                NYC
+## 8                NYC
+## 9                NYC
+## 10               NYC
+## 11               NYC
+## 12               NYC
+## 13               NYC
+## 14                LA
+## 15                LA
+## 16                LA
+## 17                LA
+## 18                LA
+## 19                LA
+## 20               NYC</code></pre>
 </div>
 <div id="bonus" class="section level2">
 <h2>BONUS</h2>
@@ -824,8 +810,8 @@ link. This will be a very useful skill as you progress in your data
 science education and career.</p>
 <p>Placing the csv file <a href="https://github.com/andrewbowen19/rBridgeCUNY/blob/main/data/labor-force-participation.csv">here</a>.
 I’m using the <a href="https://raw.githubusercontent.com/andrewbowen19/rBridgeCUNY/main/data/labor-force-participation.csv">raw
-url</a> above to make use of the <code>read.csv</code> function included
-in R.</p>
+url</a> above in our data read-in to make use of the
+<code>read.csv</code> function included in R.</p>
 </div>
 
 

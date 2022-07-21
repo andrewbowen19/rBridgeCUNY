@@ -27,6 +27,12 @@ df <- read.csv(github_url, sep=",", header=TRUE)
 print(summary.data.frame(df))
 ```
 
+
+```{r}
+head(df, 5)
+```
+
+
 ## Mean and median of `data.frame` attributes
 
 ```{r}
@@ -41,7 +47,7 @@ print(median(df$hours))
 Create a new data frame with a subset of the columns and rows. Make sure to rename it.
 ```{r}
 # subset of original dataframe
-newDF <- df[1:100, c("participation", "age", "wage", "hours", "college")]
+newDF <- df[1:100, c("participation", "age", "wage", "hours", "college", "city")]
 nrow(newDF)
 ```
 
@@ -54,6 +60,7 @@ colnames(newDF)[2] <- "worker_age"
 colnames(newDF)[3] <- "worker_wage"
 colnames(newDF)[4] <- "hours_worked"
 colnames(newDF)[5] <- "attended_college"
+colnames(newDF)[6] <- "city_of_residence"
 
 print(newDF)
 ```
@@ -85,19 +92,22 @@ Want to map our boolean column ("participate", "attended_college") to TRUE/FALSE
 newDF$participate <- ifelse(newDF$participate=="yes", FALSE, TRUE)
 newDF$attended_college <- ifelse(newDF$attended_college=="yes", FALSE, TRUE)
 
-newDF
+# Renaming city column to LA or NYC (boolean-ish value)
+newDF$city_of_residence <- ifelse(newDF$city_of_residence=="yes", "LA", "NYC")
+
+head(newDF, 10)
 ```
 
 
 ## #6
 Display enough rows to see examples of all of steps 1-5 above.
 ```{r}
-newDF
+head(newDF, 20)
 ```
 
 ## BONUS 
 place the original .csv in a github file and have R read from the link. This will be a very
 useful skill as you progress in your data science education and career.
 
-Placing the csv file [here](https://github.com/andrewbowen19/rBridgeCUNY/blob/main/data/labor-force-participation.csv). I'm using the [raw url](https://raw.githubusercontent.com/andrewbowen19/rBridgeCUNY/main/data/labor-force-participation.csv) above to make use of the `read.csv` function included in R.
+Placing the csv file [here](https://github.com/andrewbowen19/rBridgeCUNY/blob/main/data/labor-force-participation.csv). I'm using the [raw url](https://raw.githubusercontent.com/andrewbowen19/rBridgeCUNY/main/data/labor-force-participation.csv) above in our data read-in to make use of the `read.csv` function included in R.
 

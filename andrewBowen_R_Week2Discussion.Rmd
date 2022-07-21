@@ -1,0 +1,88 @@
+---
+title: "andrewBowen_R_Week2Discussion"
+author: "Andrew bowen"
+date: "2022-07-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question
+
+I'm a big NBA/sports fan. I'm curious to see which players in the NBA are most productive. To simplify the example, I'm going to use the pre-game counting stats of points, assists, and rebounds to see the top 10 players and bottom 10 players in each category.
+
+
+## Pulling Data
+I pulled 2021-22 NBA season data from [basketball-reference.com](https://www.basketball-reference.com/leagues/NBA_2022_per_game.html).
+
+```{r}
+df = read.csv('./data/nba-stats-21-22.csv', sep=',', header=TRUE)
+
+head(df, 15)
+```
+
+```{r}
+summary.data.frame(df)
+```
+
+Getting the top 10 players in points, assists, and rebounds, respectively. We only want certain columns from our `data.frame`, so we'll 
+```{r}
+# Sorting the data frame on total assist column, in decreasing order
+ast_sorted <- df[order(df$AST[df$Tm != ""], decreasing=TRUE), c("Player", "Tm", "AST")]
+
+head(ast_sorted, 10)
+```
+Check out those players that didn't involve their teammates
+```{r}
+tail(ast_sorted, 10)
+```
+
+
+
+Checking out top 10 and bottom 10 of points
+```{r}
+pts_sorted <- df[order(df$PTS, decreasing=TRUE), c("Player", "PTS")]
+
+head(pts_sorted, 10)
+```
+
+```{r}
+tail(pts_sorted, 10)
+```
+
+
+Grabbing rebounds. (Get it?)
+```{r}
+# Using total rebounds (TRB column name) to include offensive and defensive rebs
+rbs_sorted <- df[order(df$TRB, decreasing=TRUE), c("Player", "TRB")]
+
+head(rbs_sorted, 10)
+```
+```{r}
+tail(rbs_sorted, 10)
+
+```
+## Getting per-game averages
+```{r}
+df$APG <- df$AST / df$G
+df$PPG <- df$PTS / df$G
+df$RPG <- df$TRB / df$G
+
+
+head(df, 15)
+```
+
+
+## Plotting our data using `ggplot2`
+```{r}
+library(ggplot2)
+
+# Plotting points per game vs assists per game 
+ggplot(df, aes(x=APG, y=PPG))+
+  geom_point(size=2, shape=23)
+```
+
+
+
